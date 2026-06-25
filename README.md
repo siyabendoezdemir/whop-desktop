@@ -4,8 +4,20 @@
 
 # Whop (unofficial desktop wrapper)
 
+<p align="center">
+  <a href="https://whop-desktop.vercel.app/"><img src="https://img.shields.io/badge/Download-macOS-FA4616?style=for-the-badge&logo=apple&logoColor=white" alt="Download for macOS" /></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-macOS%2011%2B-151515" alt="Platform: macOS 11+" />
+  <img src="https://img.shields.io/badge/built%20with-Tauri%202-24C8DB?logo=tauri&logoColor=white" alt="Built with Tauri 2" />
+  <img src="https://img.shields.io/badge/signed%20%26%20notarized-Developer%20ID-success" alt="Signed & notarized" />
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License: MIT" />
+</p>
+
 A lightweight, native **macOS** desktop wrapper around [whop.com](https://whop.com),
-built with [Tauri 2](https://tauri.app).
+built with [Tauri 2](https://tauri.app). Universal (Apple Silicon + Intel), code
+signed and notarized by Apple — [**download it here**](https://whop-desktop.vercel.app/).
 
 > **This is an unofficial, personal-use project.** It is **not affiliated with,
 > endorsed by, or distributed by Whop.** It simply loads the public website
