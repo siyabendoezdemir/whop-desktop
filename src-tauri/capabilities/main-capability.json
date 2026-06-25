@@ -1,0 +1,8 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Minimal capability for the wrapper. Critically, it contains NO `remote` allowlist, so the remote whop.com page that the window loads is NEVER granted access to Tauri IPC, plugins, or any native command. The few core permissions below only ever apply to local (app://) content, of which this app has effectively none. Native features (downloads, notifications, menu, reveal-in-Finder, mailto/tel) are driven entirely from Rust and are not exposed to the web page.",
+  "platforms": ["macOS"],
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

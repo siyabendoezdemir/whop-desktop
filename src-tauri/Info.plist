@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Extra macOS Info.plist keys. Tauri 2's macOS bundler merges this file into the
+  generated Info.plist at build time.
+
+  These usage description strings are what macOS shows in the system TCC
+  permission prompt the FIRST time the embedded web page (whop.com) actually
+  calls navigator.mediaDevices.getUserMedia(). We do NOT request these on
+  startup; macOS only prompts on first real use.
+-->
+<plist version="1.0">
+  <dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Whop needs camera access when you choose to use video, image capture, or verification features.</string>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Whop needs microphone access when you choose to use voice, audio, or call features.</string>
+  </dict>
+</plist>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal hardened-runtime entitlements.
+
+  NOTE: Entitlements are only embedded when the .app is code-signed. For the
+  current UNSIGNED local-development builds, macOS ignores this file, and
+  camera/microphone access is gated purely by the Info.plist usage descriptions
+  plus the system TCC prompt. We include these so that IF you later sign the app
+  with a Developer ID and enable hardened runtime, camera/mic/network keep
+  working with the minimum necessary permissions and nothing more.
+
+  We intentionally do NOT enable the App Sandbox here: a personal-use unsigned
+  wrapper does not need it, and enabling it without correct provisioning would
+  break networking and media. Add com.apple.security.app-sandbox only if you
+  later distribute through a sandboxed channel.
+-->
+<plist version="1.0">
+  <dict>
+    <!-- Allow capturing video from the camera when the web page requests it. -->
+    <key>com.apple.security.device.camera</key>
+    <true/>
+
+    <!-- Allow capturing audio from the microphone when the web page requests it. -->
+    <key>com.apple.security.device.audio-input</key>
+    <true/>
+
+    <!-- Allow outbound network connections (required to load whop.com). -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+  </dict>
+</plist>
