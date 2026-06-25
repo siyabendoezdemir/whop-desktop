@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ShaderBackground } from "./shader-background";
 
 const VERSION = "0.1.0";
-const DMG_PATH = `/downloads/Whop_${VERSION}_aarch64.dmg`;
+const DMG_PATH = `/downloads/Whop_${VERSION}_universal.dmg`;
 
 export default function Home() {
   return (
@@ -37,14 +37,19 @@ export default function Home() {
         </a>
 
         <p className="mt-4 text-xs text-dust/70">
-          v{VERSION} · Apple Silicon · macOS 11+
+          v{VERSION} · Universal (Apple Silicon &amp; Intel) · macOS 11+
+        </p>
+
+        <p className="mt-10 text-xs leading-relaxed text-dust/70">
+          Open the download and drag <span className="text-foreground">Whop</span>{" "}
+          into Applications. That&apos;s it — it&apos;s signed and notarized by
+          Apple, so it just opens.
         </p>
       </div>
 
       <footer className="absolute inset-x-0 bottom-7 px-6 text-center">
         <p className="mx-auto max-w-md text-xs leading-relaxed text-dust/45">
-          Unsigned build — on first launch, right-click the app and choose Open.
-          Unofficial and for personal use; not affiliated with Whop.
+          Unofficial and for personal use. Not affiliated with Whop.
         </p>
       </footer>
     </main>

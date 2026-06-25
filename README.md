@@ -86,10 +86,10 @@ After a successful `pnpm tauri build`, the artifacts are written to:
 > The `aarch64` suffix reflects Apple Silicon. On an Intel Mac the DMG is named
 > `Whop_0.1.0_x64.dmg`.
 
-These are **unsigned local development builds** (no Apple Developer signing or
-notarization). The first time you open the `.app` you may need to right-click →
-**Open**, or run `xattr -dr com.apple.quarantine /path/to/Whop.app` if macOS
-Gatekeeper blocks it after copying it from the DMG.
+These are **unsigned local development builds**. macOS Gatekeeper will block
+them when downloaded from the web (a "Whop is damaged" message). For builds you
+intend to share, use the signed + notarized pipeline below instead — those open
+with no warning on any Mac.
 
 ---
 
@@ -251,10 +251,11 @@ Some items require your Whop login and can't be automated here:
 
 ## Troubleshooting
 
-- **"Whop is damaged / can't be opened" after copying from the DMG:** Gatekeeper
-  quarantine on an unsigned app. Run:
-  `xattr -dr com.apple.quarantine /Applications/Whop.app` (adjust the path), or
-  right-click the app → **Open** the first time.
+- **"Whop is damaged / can't be opened":** this only happens with an **unsigned
+  local build** downloaded from the web. The shared release is signed +
+  notarized and opens normally. If you built it yourself and want to bypass
+  Gatekeeper locally, run `xattr -dr com.apple.quarantine /Applications/Whop.app`
+  — or just build with `./scripts/build-signed.sh`.
 - **Camera/mic never prompts:** confirm the feature actually calls
   `getUserMedia`, and check **System Settings → Privacy & Security → Camera /
   Microphone**. If you previously denied, re-enable it there.
@@ -291,10 +292,8 @@ rm -rf "~/Library/Application Support/technologies.ciya.whop"
   Native download notifications are unaffected.
 - **Hard "force reload" (cache bypass)** isn't exposed by WKWebView; Force Reload
   performs a normal reload.
-- **Unsigned build** → Gatekeeper friction when distributing the `.app`/`.dmg`
-  (see Troubleshooting). For personal use on your own machine this is usually a
-  one-time right-click → Open.
-- **Entitlements require signing** to take effect (see Camera & microphone).
+- **Entitlements require signing** to take effect (see Camera & microphone). The
+  signed + notarized release pipeline (`./scripts/build-signed.sh`) applies them.
 
 ---
 
@@ -323,6 +322,37 @@ pnpm build        # production build
 Deploy it anywhere that hosts Next.js (e.g. Vercel). When you ship a new app
 version, drop the new `.dmg` into `landing/public/downloads/` and bump the
 version constant in `landing/app/page.tsx`.
+
+## Signed + notarized release (recommended for sharing)
+
+By default `pnpm tauri build` produces an **unsigned** app, which macOS blocks
+with a "Whop is damaged" error when downloaded from the web (it isn't damaged —
+just unsigned). With a paid Apple Developer account you can sign + notarize so
+it opens cleanly for everyone with no Terminal workaround.
+
+One-time setup:
+
+1. Create a **Developer ID Application** certificate
+   (developer.apple.com → Certificates) and install it in Keychain. Confirm with:
+   ```bash
+   security find-identity -v -p codesigning
+   ```
+2. Create notarization credentials — either an **App Store Connect API key**
+   (recommended) or an **Apple ID app-specific password**.
+3. Configure your secrets (never committed):
+   ```bash
+   cp .env.signing.example .env.signing   # then fill it in
+   ```
+
+Build a signed + notarized **universal** (Intel + Apple Silicon) release:
+
+```bash
+./scripts/build-signed.sh
+```
+
+This signs, uploads to Apple for notarization, staples the ticket, verifies it,
+and copies the result to `landing/public/downloads/`. The output opens with no
+warning on any Mac. `.env.signing`, `*.p8`, `*.p12`, and `*.cer` are gitignored.
 
 ## Contributing / building from a fresh clone
 
