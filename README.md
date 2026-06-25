@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./banner.png" alt="Whop for macOS — an unofficial, open-source desktop app" />
+</p>
+
 # Whop (unofficial desktop wrapper)
 
 A lightweight, native **macOS** desktop wrapper around [whop.com](https://whop.com),
