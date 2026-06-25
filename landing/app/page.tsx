@@ -64,12 +64,6 @@ export default function Home() {
         <p className="mt-4 text-xs text-dust/70">
           v{VERSION} · Universal (Apple Silicon &amp; Intel) · macOS 11+
         </p>
-
-        <p className="mt-10 text-xs leading-relaxed text-dust/70">
-          Open the download and drag <span className="text-foreground">Whop</span>{" "}
-          into Applications. That&apos;s it — it&apos;s signed and notarized by
-          Apple, so it just opens.
-        </p>
       </div>
 
       <footer className="absolute inset-x-0 bottom-7 px-6 text-center">
